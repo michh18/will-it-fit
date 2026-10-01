@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,71 +11,42 @@
 <body>
     <main>
         <h1>Will It Fit?</h1>
-        <p>Enter the dimensions of your available space and the item you want to fit.</p>
+        <p>Enter the dimensions of your available doorway space and the item you want to fit.</p>
 
         <section>
-            <h2>Available Space</h2>
+            <h2>Doorway</h2>
 
-            <label for="space-width">Width (cm)</label>
-            <input
-                type="number"
-                id="space-width"
-                min="0"
-                placeholder="e.g. 60"
-            >
+            <label for="door-width">Width (cm)</label>
+            <input type="number" id="door-width" min="0" placeholder="e.g. 80">
 
-            <label for="space-height">Height (cm)</label>
-            <input
-                type="number"
-                id="space-height"
-                min="0"
-                placeholder="e.g. 180"
-            >
+            <label for="door-height">Height (cm)</label>
+            <input type="number" id="door-height" min="0" placeholder="e.g. 200">
 
-            <label for="space-depth">Depth (cm)</label>
-            <input
-                type="number"
-                id="space-depth"
-                min="0"
-                placeholder="e.g. 60"
-            >
+            <label for="clearance">Clearance (cm)</label>
+            <input type="number" id="clearance" min="0" value="2">
         </section>
 
         <section>
             <h2>Item</h2>
 
             <label for="item-width">Width (cm)</label>
-            <input
-                type="number"
-                id="item-width"
-                min="0"
-                placeholder="e.g. 55"
-            >
+            <input type="number" id="item-width" min="0" placeholder="e.g. 55">
 
             <label for="item-height">Height (cm)</label>
-            <input
-                type="number"
-                id="item-height"
-                min="0"
-                placeholder="e.g. 153"
-            >
+            <input type="number" id="item-height" min="0" placeholder="e.g. 153">
 
             <label for="item-depth">Depth (cm)</label>
-            <input
-                type="number"
-                id="item-depth"
-                min="0"
-                placeholder="e.g. 55"
-            >
+            <input type="number" id="item-depth" min="0" placeholder="e.g. 55">
         </section>
 
         <button id="check-fit">Check fit</button>
 
         <section id="result">
-            
+
         </section>
     </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
