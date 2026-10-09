@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 import request from "supertest";
-import { app } from "./app";
+import { createApp } from "./app";
+import { openDb } from "./db";
+
+const app = createApp(openDb(":memory:"));
 
 describe("POST /check", () => {
     it("returns a fit result for valid input", async () => {
