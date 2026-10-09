@@ -13,6 +13,11 @@ export default function App() {
   const [result, setResult] = useState<FitResult | null>(null);
   const [error, setError] = useState("");
 
+  const [newName, setNewName] = useState("");
+  const [newWidth, setNewWidth] = useState("");
+  const [newHeight, setNewHeight] = useState("");
+  const [newDepth, setNewDepth] = useState("");
+
   useEffect(() => {
     fetch("/items")
       .then((r) => r.json())
@@ -61,6 +66,36 @@ export default function App() {
     }
   }
 
+  async function handleAddItem() {
+    setError("");
+    try {
+      const res = await fetch("/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newName,
+          width: Number(newWidth),
+          height: Number(newHeight),
+          depth: Number(newDepth),
+        }),
+      });
+      if (!res.ok) {
+        setError("Couldn't add the item. Check the name and that all sizes are positive.");
+        return;
+      }
+      const created: SavedItem = await res.json();
+      setItems((prev) => [...prev, created]);
+      setItemId(String(created.id));
+      setResult(null);
+      setNewName("");
+      setNewWidth("");
+      setNewHeight("");
+      setNewDepth("");
+    } catch {
+      setError("Couldn't reach the server.");
+    }
+  }
+
   return (
     <main style={{ maxWidth: 500, margin: "40px auto", fontFamily: "Arial, sans-serif" }}>
       <h1>Will It Fit?</h1>
@@ -79,6 +114,30 @@ export default function App() {
           </option>
         ))}
       </select>
+
+      <h3>Add your own item</h3>
+      <label>
+        Name
+        <input value={newName} onChange={(e) => setNewName(e.target.value)} />
+      </label>
+      <label>
+        Width (cm)
+        <input type="number" min="0" value={newWidth} onChange={(e) => setNewWidth(e.target.value)} />
+      </label>
+      <label>
+        Height (cm)
+        <input type="number" min="0" value={newHeight} onChange={(e) => setNewHeight(e.target.value)} />
+      </label>
+      <label>
+        Depth (cm)
+        <input type="number" min="0" value={newDepth} onChange={(e) => setNewDepth(e.target.value)} />
+      </label>
+      <button
+        onClick={handleAddItem}
+        disabled={!newName.trim() || !newWidth || !newHeight || !newDepth}
+      >
+        Add item
+      </button>
 
       <h2>Doorway</h2>
       <label>
