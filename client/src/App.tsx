@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 import type { FitResult } from "../../shared/src/fit";
+import FitDiagram from "./FitDiagram";
 
 type SavedItem = { id: number; name: string; width: number; height: number; depth: number };
 
@@ -161,11 +162,22 @@ export default function App() {
         {error && <p>{error}</p>}
         {result && !result.fits && <p>Oh no. It doesn't fit.</p>}
         {result && result.fits && item && (
-          <p>
-            It fits with {result.margin.toFixed(1)} cm to spare. Feed the {item[result.leads]} cm edge
-            through first, with the {item[result.horizontal]} cm side across the doorway and the{" "}
-            {item[result.vertical]} cm side running up and down.
-          </p>
+          <>
+            <p>
+              It fits with {result.margin.toFixed(1)} cm to spare. Feed the {item[result.leads]} cm edge
+              through first, with the {item[result.horizontal]} cm side across the doorway and the{" "}
+              {item[result.vertical]} cm side running up and down.
+            </p>
+            <FitDiagram
+              doorWidth={Number(doorWidth)}
+              doorHeight={Number(doorHeight)}
+              clearance={Number(clearance)}
+              itemAcross={item[result.horizontal]}
+              itemUp={item[result.vertical]}
+              fits={true}
+            />
+            <figcaption>Cross-section as seen from the front of the door</figcaption>
+          </>
         )}
       </div>
     </main>
