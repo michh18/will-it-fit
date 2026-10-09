@@ -10,7 +10,7 @@ Work in progress. Currently done:
 - Original vanilla JS prototype (`legacy/`), kept for reference
 - Fit logic in TypeScript (`shared/src/fit.ts`), with unit tests
 - Express API with `POST /check` and CRUD for saved items (`/items`)
-- Input validation using Zod 
+- Input validation using Zod
 - SQLite persistence, seeded with sample items
 
 Planned:
@@ -25,9 +25,12 @@ The doorway is treated as a 2D opening. The function tries each of the item's
 three dimensions as the one that travels through the door, and both rotations
 of the other two across the opening. It returns the orientation with the most
 spare room, in cm.
+
 The Express API validates incoming requests using Zod before passing the dimensions to the fit-checking function.
 
 ## Running the app
+
+First run creates a local `will-it-fit.db` file and seeds it.
 
 Install dependencies:
 
@@ -47,7 +50,7 @@ npm run dev
 npm test
 ```
 
-## API 
+## API
 
 ### POST /check
 
