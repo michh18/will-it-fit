@@ -34,4 +34,22 @@ describe("POST /check", () => {
         expect(res.status).toBe(400);
         expect(res.body.error).toBe("Malformed JSON");
     });
+
+    it("checks a saved item by id", async () => {
+        const created = await request(app)
+            .post("/items")
+            .send({ name: "Box", width: 55, height: 153, depth: 55 });
+        const res = await request(app)
+            .post("/check")
+            .send({ itemId: created.body.id, door: { width: 80, height: 200 } });
+        expect(res.status).toBe(200);
+        expect(res.body.fits).toBe(true);
+    });
+
+    it("returns 404 for an unknown itemId", async () => {
+        const res = await request(app)
+            .post("/check")
+            .send({ itemId: 9999, door: { width: 80, height: 200 } });
+        expect(res.status).toBe(404);
+    });
 });

@@ -1,7 +1,7 @@
 import express from "express";
 import type { ErrorRequestHandler } from "express";
 import type { Db } from "./db";
-import { checkRouter } from "./routes/check";
+import { createCheckRouter } from "./routes/check";
 import { createItemsRouter } from "./routes/items";
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
@@ -15,7 +15,7 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 export function createApp(db: Db) {
     const app = express();
     app.use(express.json());
-    app.use(checkRouter);
+    app.use(createCheckRouter(db));
     app.use("/items", createItemsRouter(db));
     app.use(errorHandler);
     return app;
