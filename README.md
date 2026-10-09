@@ -12,10 +12,10 @@ Work in progress. Currently done:
 - Express API with `POST /check` and CRUD for saved items (`/items`)
 - Input validation using Zod
 - SQLite persistence, seeded with sample items
+- React frontend
 
 Planned:
 
-- React frontend
 - Car boot mode
 - Deployment
 
@@ -30,19 +30,28 @@ The Express API validates incoming requests using Zod before passing the dimensi
 
 ## Running the app
 
-First run creates a local `will-it-fit.db` file and seeds it.
-
-Install dependencies:
+Install dependencies for the server and the client:
 
 ```bash
 npm install
+npm --prefix client install
 ```
 
-Start the development server:
+Start the API (in one terminal):
 
 ```bash
 npm run dev
 ```
+
+The first run creates a local `will-it-fit.db` file and seeds it with sample items.
+
+Start the React client (in a second terminal):
+
+```bash
+npm run client
+```
+
+Then open `http://localhost:5173`.
 
 ## Running the tests
 
