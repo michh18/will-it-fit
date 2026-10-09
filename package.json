@@ -4,7 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "dev": "tsx watch server/src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,15 @@
   },
   "homepage": "https://github.com/michh18/will-it-fit#readme",
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/supertest": "^7.2.1",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "zod": "^4.6.5"
   }
 }
